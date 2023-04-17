@@ -21,7 +21,7 @@ public class DatePrefixedSequenceIdGenerator extends SequenceStyleGenerator {
     @Value("${app.dc:vj}")
     private String dc;
 
-    //consider other values for config
+    //consider other values for config1
     public static final String DATE_FORMAT_PARAMETER = "dateFormat";
     public static final String DATE_FORMAT_DEFAULT = "%tY-%tm-%td";
 
