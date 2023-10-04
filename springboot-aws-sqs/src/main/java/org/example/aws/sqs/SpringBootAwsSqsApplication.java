@@ -4,14 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration;
 
 import javax.annotation.PostConstruct;
 
-@SpringBootApplication(exclude = {ContextStackAutoConfiguration.class})
+@SpringBootApplication
 @Slf4j
 public class SpringBootAwsSqsApplication {
-    @Value("${test-property}")
+    @Value("${test-property:helloworld!!}")
     private String testProp;
 
     public static void main(String[] args) {
