@@ -29,4 +29,9 @@ public class TransactionController {
         transactionService.saveTransaction(transactionDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("created");
     }
+
+    @GetMapping("next")
+    public ResponseEntity<?> getNextTransaction(@RequestParam String userId) {
+        return new ResponseEntity<>(transactionService.getNextTransaction(userId),HttpStatus.OK);
+    }
 }

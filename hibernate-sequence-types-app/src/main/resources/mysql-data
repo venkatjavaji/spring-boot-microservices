@@ -1,0 +1,33 @@
+#Seqence :
+
+create sequence hibernate_sequence start 1 increment 1;
+drop sequence hibernate_sequence;
+
+#Ref
+https://thorben-janssen.com/5-things-you-need-to-know-when-using-hibernate-with-mysql/#1_Mappings_Primary_Keys
+
+https://www.jpa-buddy.com/blog/the-ultimate-guide-on-db-generated/
+
+https://amrutprabhu.medium.com/spring-boot-jpa-bulk-insert-performance-by-100-times-14ec10fa682b
+
+
+#notes:
+- Leaving default values for the ID generation strategy will likely cause negative effects on our application performance.
+For the production applications, we need to change defaults to something more appropriate.
+
+Conclusion: Identity vs Sequence vs Others
+So, which ID generation strategy should we choose for our JPA entities? Here are some recommendations:
+
+SEQUENCE is the preferred choice – it provides better overall performance compared to other strategies. Also, we need to consider the following:
+a. It is a good practice to define a separate sequence for each JPA entity. Avoid default sequence generator parameters.
+b. We should use @SequenceGenerator annotation to fine-tune sequence parameters.
+c. We need to define batch size according to the application workload patterns.
+
+We may prefer the IDENTITY strategy for the following cases:
+a. If the database does not support sequences.
+b. For entities that are not frequently created and saved.
+c. If our database is modified by other applications.
+
+Avoid TABLE and AUTO generation strategies if possible. They provide the worst performance.
+The IDs list is not limited to simple server-generated IDs only. In the following articles, we will talk about client-generated IDs and UUIDs in particular.
+Also, though not very popular, composite IDs have something to learn about, so we will talk about them too.

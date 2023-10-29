@@ -23,10 +23,10 @@ public class DatePrefixedSequenceIdGenerator extends SequenceStyleGenerator {
 
     //consider other values for config1
     public static final String DATE_FORMAT_PARAMETER = "dateFormat";
-    public static final String DATE_FORMAT_DEFAULT = "%tY-%tm-%td";
+    public static final String DATE_FORMAT_DEFAULT = "%tY%tm%td";
 
     public static final String NUMBER_FORMAT_PARAMETER = "numberFormat";
-    public static final String NUMBER_FORMAT_DEFAULT = "%05d";
+    public static final String NUMBER_FORMAT_DEFAULT = "%06d";
 
     public static final String DATE_NUMBER_SEPARATOR_PARAMETER = "dateNumberSeparator";
     public static final String DATE_NUMBER_SEPARATOR_DEFAULT = "_";
@@ -36,7 +36,7 @@ public class DatePrefixedSequenceIdGenerator extends SequenceStyleGenerator {
     @Override
     public Serializable generate(SharedSessionContractImplementor session,
                                  Object object) throws HibernateException {
-        return String.format(format, LocalDate.now(), super.generate(session, object)) + dc;
+        return Long.parseLong(String.format(format, LocalDate.now(), super.generate(session, object)));
     }
 
     @Override
@@ -46,8 +46,9 @@ public class DatePrefixedSequenceIdGenerator extends SequenceStyleGenerator {
 
         String dateFormat = ConfigurationHelper.getString(DATE_FORMAT_PARAMETER, params, DATE_FORMAT_DEFAULT).replace("%", "%1$");
         String numberFormat = ConfigurationHelper.getString(NUMBER_FORMAT_PARAMETER, params, NUMBER_FORMAT_DEFAULT).replace("%", "%2$");
-        String dateNumberSeparator = ConfigurationHelper.getString(DATE_NUMBER_SEPARATOR_PARAMETER, params, DATE_NUMBER_SEPARATOR_DEFAULT);
-        this.format = dateFormat+dateNumberSeparator+numberFormat;
+//        String dateNumberSeparator = ConfigurationHelper.getString(DATE_NUMBER_SEPARATOR_PARAMETER, params, DATE_NUMBER_SEPARATOR_DEFAULT);
+//        this.format = dateFormat+dateNumberSeparator+numberFormat;
+        this.format = dateFormat + numberFormat;
     }
 
     public static void main(String[] args) {

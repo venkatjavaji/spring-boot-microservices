@@ -10,4 +10,6 @@ public interface TransactionService {
     List<CustTransaction> getTransactions();
 
     void saveTransaction(TransactionDto transactionDto);
+
+    String getNextTransaction(String userId);
 }
