@@ -1,0 +1,24 @@
+## sample request - query the authors
+{
+  authors {
+    name
+    id
+    books {
+      title
+      id
+      publicationYear
+    }
+  }
+  authorById(id: 1) {
+    name
+    id
+  }
+}
+
+
+## addBook
+mutation {
+  addBook(book : {title :"Spring Cloud in Action", publicationYear : 2024, authorId : 2}) {
+    id
+  }
+}
